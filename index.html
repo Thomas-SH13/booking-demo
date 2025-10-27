@@ -46,20 +46,32 @@
     </form>
     <div class="success" id="successMsg" style="display:none;"></div>
   </div>
-  <script>
-    document.getElementById('bookingForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      // 收集資料
-      const resource = document.getElementById('resource').value;
-      const date = document.getElementById('date').value;
-      const time = document.getElementById('time').value;
-      const name = document.getElementById('name').value;
-      // 這裡可以之後串接API，現在先顯示預約成功
-      document.getElementById('successMsg').style.display = 'block';
-      document.getElementById('successMsg').innerText = 
-        `預約已送出！\n項目：${resource}\n日期：${date}\n時間：${time}\n姓名：${name}`;
-      document.getElementById('bookingForm').reset();
-    });
-  </script>
+<script>
+  const scriptURL = "https://script.google.com/macros/s/AKfycbzCHwjfn87gACQ12jSXLYGMilMdqYtnhKjY1y7XYNsPCnHQeWU_j_p9RJ56BhXWcYdP/exec";
+  document.getElementById('bookingForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const resource = document.getElementById('resource').value;
+    const date = document.getElementById('date').value;
+    const time = document.getElementById('time').value;
+    const name = document.getElementById('name').value;
+    fetch(scriptURL, {
+      method: 'POST',
+      body: JSON.stringify({resource, date, time, name}),
+      headers: {'Content-Type': 'application/json'}
+    })
+    .then(response => response.json())
+    .then(result => {
+      if (result.result === 'success') {
+        document.getElementById('successMsg').style.display = 'block';
+        document.getElementById('successMsg').innerText = 
+          `預約已送出！\n項目：${resource}\n日期：${date}\n時間：${time}\n姓名：${name}`;
+        document.getElementById('bookingForm').reset();
+      } else {
+        alert('送出失敗，請稍後再試。');
+      }
+    })
+    .catch(() => alert('送出失敗，請檢查網路或稍後再試。'));
+  });
+</script>
 </body>
 </html>
