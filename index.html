@@ -54,6 +54,7 @@
     const date = document.getElementById('date').value;
     const time = document.getElementById('time').value;
     const name = document.getElementById('name').value;
+    console.log('送出資料', {resource, date, time, name});
     fetch(scriptURL, {
       method: 'POST',
       body: JSON.stringify({resource, date, time, name}),
