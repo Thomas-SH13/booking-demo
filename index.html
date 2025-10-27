@@ -46,9 +46,9 @@
     </form>
     <div class="success" id="successMsg" style="display:none;"></div>
   </div>
-<script>
-  const scriptURL = "https://script.google.com/macros/s/AKfycbzCHwjfn87gACQ12jSXLYGMilMdqYtnhKjY1y7XYNsPCnHQeWU_j_p9RJ56BhXWcYdP/exec";
-  document.getElementById('bookingForm').addEventListener('submit', function(e) {
+  <script>
+    const scriptURL = "https://script.google.com/macros/s/AKfycbzCHwjfn87gACQ12jSXLYGMilMdqYtnhKjY1y7XYNsPCnHQeWU_j_p9RJ56BhXWcYdP/exec";
+    document.getElementById('bookingForm').addEventListener('submit', function(e) {
     e.preventDefault();
     const resource = document.getElementById('resource').value;
     const date = document.getElementById('date').value;
@@ -72,7 +72,7 @@
       }
     })
     .catch(() => alert('送出失敗，請檢查網路或稍後再試。'));
-  });
-</script>
+    });
+  </script>
 </body>
 </html>
